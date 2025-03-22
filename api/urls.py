@@ -4,8 +4,8 @@ from . import views
 
 
 urlpatterns = [
-    path("",views.product_list),
-    path("<int:pk>",views.product),
+    path("",views.GetProductListApiView.as_view()),
+    path("<int:pk>",views.GetProductItemAPIView.as_view()),
     path("orders",views.get_orders),
     path("order-products",views.get_orders_products),
     path("create-order",views.create_order),

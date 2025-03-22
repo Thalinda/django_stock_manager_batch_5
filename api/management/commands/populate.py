@@ -16,11 +16,11 @@ class Command(BaseCommand):
 
         # create products - name, desc, price, stock, image
         products = [
-            Product(name="A Scanner Darkly", description=lorem_ipsum.paragraph(), price=Decimal('12.99'), stock=4),
-            Product(name="Coffee Machine", description=lorem_ipsum.paragraph(), price=Decimal('70.99'), stock=6),
-            Product(name="Velvet Underground & Nico", description=lorem_ipsum.paragraph(), price=Decimal('15.99'), stock=11),
-            Product(name="Enter the Wu-Tang (36 Chambers)", description=lorem_ipsum.paragraph(), price=Decimal('17.99'), stock=2),
-            Product(name="Digital Camera", description=lorem_ipsum.paragraph(), price=Decimal('350.99'), stock=4),
+            Product(name="A Scanner", description=lorem_ipsum.paragraph(), price=Decimal('12.99'), stock=4),
+            Product(name="Coffee", description=lorem_ipsum.paragraph(), price=Decimal('70.99'), stock=6),
+            Product(name="Velvet", description=lorem_ipsum.paragraph(), price=Decimal('15.99'), stock=11),
+            Product(name="Enter", description=lorem_ipsum.paragraph(), price=Decimal('17.99'), stock=2),
+            Product(name="Digital", description=lorem_ipsum.paragraph(), price=Decimal('350.99'), stock=4),
             Product(name="Watch", description=lorem_ipsum.paragraph(), price=Decimal('500.05'), stock=0),
         ]
 

@@ -3,9 +3,13 @@ from api.serializers import ProductSerializer,OrderItemSerializer,OrderSerialize
 from .models import Product,OrderItem,Order
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView,RetrieveAPIView
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(["GET","POST"]) #Decorator
 def product_list(request):
@@ -21,15 +25,19 @@ def product_list(request):
         serialize = ProductSerializer(products,many=True)
         return Response(serialize.data)
 
+class GetProductListApiView(ListCreateAPIView):
+       authentication_classes = [JWTAuthentication]
+       permission_classes = [IsAuthenticated]
+       serializer_class = ProductSerializer
+       def get_queryset(self):
+            print(self.request.user)
+            return Product.objects.all()
 
-@api_view(['GET']) #Decorator
-def product(request,pk):
-    product = get_object_or_404(Product,pk=pk)
-    serializer = ProductSerializer(product)
-    return Response(
-        serializer.data
-    )
-    
+
+
+class GetProductItemAPIView(RetrieveAPIView):
+        queryset = Product.objects.all()
+        serializer_class = ProductSerializer
     
     
 @api_view(['GET'])
@@ -40,6 +48,8 @@ def get_orders_products(request):
 
     
 @api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def get_orders(request):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders,many=True)
@@ -69,3 +79,10 @@ def create_order(request):
         
     serialier = OrderSerializer(order)
     return Response(serialier.data,status=status.HTTP_201_CREATED)
+
+
+# Nextweek 
+
+# user authentication
+# multiple validation
+#  creating the app
